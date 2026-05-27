@@ -1,0 +1,290 @@
+/* css */
+/* File: src/main/resources/static/assets/css/adminDashboard.css */
+
+/* Universal reset and base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: transparent;
+  color: #0f1724;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout wrappers */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 36px 20px;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('/assets/images/admin-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-radius: 10px;
+}
+
+/* Admin controls row */
+.admin-controls {
+  width: 100%;
+}
+
+.search-filter-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Search bar */
+#searchBar {
+  flex: 1 1 360px;
+  min-width: 220px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.06);
+  background: #ffffff;
+  font-size: 14px;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+#searchBar:focus {
+  outline: none;
+  border-color: rgba(45,108,223,0.9);
+  box-shadow: 0 8px 24px rgba(45,108,223,0.08);
+}
+
+/* Filter dropdowns */
+.select-dropdown,
+#sortSelect,
+#specialtySelect {
+  appearance: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.06);
+  background: #fff;
+  font-size: 14px;
+  min-width: 160px;
+}
+.select-dropdown:focus,
+#sortSelect:focus,
+#specialtySelect:focus {
+  outline: none;
+  border-color: rgba(45,108,223,0.9);
+  box-shadow: 0 8px 24px rgba(45,108,223,0.06);
+}
+
+/* Add Doctor button and generic button styles */
+.button,
+.adminBtn,
+.add-doctor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+.adminBtn,
+.add-doctor-btn {
+  background: linear-gradient(180deg, #2d6cf5, #1f4fd3);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(31,79,211,0.14);
+}
+.adminBtn:hover,
+.add-doctor-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(31,79,211,0.16);
+}
+.button.secondary {
+  background: #f1f5f9;
+  color: #0f1724;
+  box-shadow: none;
+}
+.button.secondary:hover {
+  opacity: 0.95;
+}
+
+/* Content area and doctor grid */
+#content {
+  margin-top: 6px;
+  width: 100%;
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.doctor-card {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(2,6,23,0.04);
+  box-shadow: 0 8px 28px rgba(2,6,23,0.03);
+  align-items: center;
+}
+.doctor-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  background: #e6eefc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #123;
+  flex-shrink: 0;
+}
+.doctor-info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.doctor-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f1724;
+}
+.doctor-meta {
+  font-size: 13px;
+  color: #64748b;
+}
+.doctor-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Doctor card action buttons */
+.card-btn {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(15,23,42,0.06);
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+.card-btn.primary {
+  background: linear-gradient(180deg,#10b981,#059669);
+  color: #fff;
+  border: none;
+}
+.card-btn.danger {
+  background: linear-gradient(180deg,#ff6b6b,#f43f5e);
+  color: #fff;
+  border: none;
+}
+
+/* Modal refinements (admin) */
+#modal {
+  /* preserve default .modal behavior from global stylesheet but ensure smooth transitions */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+}
+#modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  max-width: 720px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 12px;
+}
+/* modal form elements */
+#modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#modal-body input[type="text"],
+#modal-body input[type="email"],
+#modal-body input[type="tel"],
+#modal-body textarea,
+#modal-body select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(15,23,42,0.06);
+  font-size: 14px;
+  background: #fff;
+}
+#modal-body input:focus,
+#modal-body textarea:focus,
+#modal-body select:focus {
+  outline: none;
+  border-color: rgba(45,108,223,0.9);
+  box-shadow: 0 8px 24px rgba(45,108,223,0.06);
+}
+
+/* Responsive behavior */
+@media (max-width: 1000px) {
+  .doctor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .search-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #searchBar {
+    width: 100%;
+  }
+  .filters {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+  .doctor-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-content {
+    padding: 20px 14px;
+    border-radius: 8px;
+    background-attachment: scroll;
+  }
+}
+
+/* Small utilities */
+.text-muted {
+  color: #64748b;
+  font-size: 13px;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

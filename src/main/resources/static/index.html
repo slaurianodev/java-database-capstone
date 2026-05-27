@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="./assets/css/index.css">
+<link rel="stylesheet" href="./assets/css/style.css">
+<script src="./js/util.js" defer></script>
+<script src="./js/render.js" defer></script>
+<script src="./js/components/header.js" defer></script>
+<script src="./js/components/footer.js" defer></script>
+<script type="module" src="./js/services/index.js" defer></script>
+<body>
+<div class="container">
+    <div class="wrapper">
+        <!-- Header Placeholder -->
+        <div id="header"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2 id="role-heading">Select Your Role</h2>
+
+            <div id="role-buttons" class="role-buttons-container">
+                <button
+                        id="admin-btn"
+                        class="role-button admin-button"
+                        onclick="selectRole('admin')"
+                >
+                    Admin
+                </button>
+
+                <button
+                        id="doctor-btn"
+                        class="role-button doctor-button"
+                        onclick="selectRole('doctor')"
+                >
+                    Doctor
+                </button>
+
+                <button
+                        id="patient-btn"
+                        class="role-button patient-button"
+                        onclick="selectRole('patient')"
+                >
+                    Patient
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer Placeholder -->
+        <div id="footer"></div>
+    </div>
+</div>
+
+<!-- Hidden Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button id="closeModal" class="close-button">&times;</button>
+        <div id="modal-body" class="modal-body">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Service Module -->
+<script type="module" src="../js/services/index.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+:root{
+  --bg: #f5f7f8;
+  --card-bg: #ffffff;
+  --accent: #015c5d;
+  --accent-hover: #017d7e;
+  --muted: #6b6b6b;
+  --thead-bg: rgba(0,0,0,0.6);
+  --border: #e8e8e8;
+}
+
+/* Reset & base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: #222; -webkit-font-smoothing:antialiased; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+/* Layout */
+.wrapper { display: flex; flex-direction: column; min-height: 100vh; gap: 16px; align-items: stretch; background: linear-gradient(180deg, #ffffff 0%, #f8fcfc 100%); border-radius: 8px; }
+.main-content { flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 16px; }
+
+/* Search & filters */
+.search-filter-row { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.search-filter-row .left, .search-filter-row .right { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+input[type="text"], input[type="date"], select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  min-width: 200px;
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+input[type="text"]:focus, input[type="date"]:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(1,92,93,0.06);
+  border-color: var(--accent);
+}
+
+/* Buttons */
+.button, .adminBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .18s ease, transform .12s ease;
+}
+.button:hover, .adminBtn:hover { background: var(--accent-hover); }
+
+/* Table area */
+.table-responsive { width: 100%; overflow-x: auto; background: var(--card-bg); border-radius: 8px; padding: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.03); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; table-layout: auto; }
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 12px;
+  text-align: left;
+  background: var(--thead-bg);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+tbody td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+
+/* Row styles */
+tbody tr:nth-child(even) { background: #fafafa; }
+tbody tr:hover { background: rgba(1,125,126,0.06); transition: background .12s ease; }
+
+/* Prescription button */
+.prescription-btn {
+  background: var(--accent-hover);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+.prescription-btn:hover { transform: scale(1.04); filter: brightness(1.06); }
+
+/* No records state */
+.noPatientRecord {
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  padding: 18px;
+}
+
+/* Responsive behavior */
+@media (max-width: 900px) {
+  .search-filter-row { gap: 10px; }
+  input[type="text"], select { min-width: 160px; }
+  table { font-size: 13px; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 10px; }
+  .search-filter-row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .search-filter-row .left, .search-filter-row .right { width: 100%; justify-content: space-between; }
+  input[type="text"], input[type="date"], select { width: 100%; min-width: 0; }
+  thead th { font-size: 13px; }
+  table { font-size: 13px; }
+  .button, .adminBtn { width: 100%; padding: 10px; }
+}

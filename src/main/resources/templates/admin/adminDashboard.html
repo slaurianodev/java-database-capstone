@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+
+<!--  <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">-->
+  <link href="/assets/css/adminDashboard.css" rel="stylesheet" >
+  <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+  <script th:src="@{/js/render.js}" defer></script>
+  <script th:src="@{/js/util.js}" defer></script>
+  <script th:src="@{/js/components/header.js}" defer></script>
+  <script th:src="@{/js/components/footer.js}" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <div id="header"></div>
+
+      <main class="main-content">
+        <div class="admin-controls" style="width:100%;max-width:1200px;margin:0 auto;">
+          <div class="search-filter-row" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <input type="text" id="searchBar" placeholder="search by doctor name" style="flex:1;min-width:220px;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);">
+
+            <div class="filters" style="display:flex;gap:12px;align-items:center;">
+              <select id="sortSelect" class="select-dropdown">
+                <option value="">Sort by time</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="availability">Availability</option>
+              </select>
+
+              <select id="specialtySelect" class="select-dropdown">
+                <option value="">Filter by specialty</option>
+                <option value="cardiology">Cardiology</option>
+                <option value="dermatology">Dermatology</option>
+                <option value="general">General Practice</option>
+                <option value="pediatrics">Pediatrics</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="content"></div>
+        </div>
+      </main>
+
+      <div id="footer"></div>
+    </div>
+  </div>
+
+  <div id="modal" class="modal">
+    <span id="closeModal" class="close">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+
+  <script type="module" src="../js/services/adminDashboard.js" defer></script>
+  <script type="module" src="../js/components/doctorCard.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DoctorDashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" th:href="@{/favicon.ico}" />
+
+    <!-- Stylesheets (include plain href for IDE/static resolution and th:href for Thymeleaf) -->
+    <link rel="stylesheet" href="/assets/css/adminDashboard.css" th:href="@{/assets/css/adminDashboard.css}" />
+    <link rel="stylesheet" href="/assets/css/doctorDashboard.css" th:href="@{/assets/css/doctorDashboard.css}" />
+    <link rel="stylesheet" href="/assets/css/style.css" th:href="@{/assets/css/style.css}" />
+
+    <!-- Utility scripts -->
+    <script src="/js/render.js" th:src="@{/js/render.js}" defer></script>
+    <script src="/js/util.js" th:src="@{/js/util.js}" defer></script>
+
+    <!-- Components -->
+    <script src="/js/components/header.js" th:src="@{/js/components/header.js}" defer></script>
+    <script src="/js/components/footer.js" th:src="@{/js/components/footer.js}" defer></script>
+    <script src="/js/components/patientRows.js" th:src="@{/js/components/patientRows.js}" defer></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <!-- dynamic header -->
+        <div id="header"></div>
+
+        <main class="main-content">
+          <section class="admin-controls">
+            <div class="search-filter-row">
+              <!-- Search bar -->
+              <input type="text" id="searchBar" placeholder="Search patients by name or ID" />
+
+              <!-- Filters / quick actions -->
+              <div class="filters" style="display:flex; gap:8px; align-items:center;">
+                <button id="todayBtn" class="adminBtn">Today's Appointments</button>
+                <input type="date" id="datePicker" />
+              </div>
+            </div>
+          </section>
+
+          <!-- Patient records table -->
+          <section class="records" style="width:100%; margin-top:12px;">
+            <div class="table-responsive">
+              <table id="patientTable" style="width:100%; border-collapse:collapse;">
+                <thead>
+                  <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Prescription</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- rows injected dynamically by patientRows.js / patientServices.js -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <!-- dynamic footer -->
+        <div id="footer"></div>
+      </div>
+    </div>
+
+    <!-- Service and page logic (use type=module where appropriate) -->
+    <script type="module" src="/js/services/patientServices.js" th:src="@{/js/services/patientServices.js}" defer></script>
+    <script type="module" src="/js/pages/doctorDashboard.js" th:src="@{/js/pages/doctorDashboard.js}" defer></script>
+  </body>
+</html>

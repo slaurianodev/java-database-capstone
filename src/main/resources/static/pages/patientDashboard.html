@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Metadata and title -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${pageTitle} ?: 'Patient Dashboard'">Patient Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/patientDashboard.css}" />
+
+    <!-- JS Scripts -->
+    <script th:src="@{/js/render.js}" defer></script>
+    <script th:src="@{/js/util.js}" defer></script>
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
+    <script type="module" th:src="@{/js/components/modals.js}"></script>
+
+    <!-- Page Logic -->
+    <script type="module" th:src="@{/js/patientDashboard.js}" defer></script>
+</head>
+
+<body onload="renderContent()">
+<div class="container">
+    <div class="wrapper">
+
+        <!-- Header (can be fragment if needed) -->
+        <div id="header" th:replace="~{fragments/header :: header}"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Search Bar -->
+            <input
+                    type="text"
+                    id="searchBar"
+                    class="searchBar"
+                    placeholder="Search Bar for custom output"
+            />
+
+            <!-- Filters -->
+            <div class="filter-wrapper">
+                <select class="filter-select" id="filterTime">
+                    <option value="">All Times</option>
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                </select>
+
+                <select class="filter-select" id="filterSpecialty">
+                    <option value="">All Specialties</option>
+                    <option th:each="spec : ${specialties}"
+                            th:value="${spec}"
+                            th:text="${spec}">
+                    </option>
+                </select>
+            </div>
+
+            <!-- Dynamic Content (server-side fallback + JS enhancement) -->
+            <div id="content">
+                <div th:if="${doctors != null}">
+                    <div th:each="doctor : ${doctors}" class="doctor-card">
+                        <h3 th:text="${doctor.name}">Doctor Name</h3>
+                        <p th:text="${doctor.specialty}">Specialty</p>
+                        <p th:text="${doctor.availableTime}">Time</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer (fragment) -->
+        <div id="footer" th:replace="~{fragments/footer :: footer}"></div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+</body>
+</html>
