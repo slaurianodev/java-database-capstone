@@ -47,17 +47,9 @@ public class MainService {
     // TOKEN VALIDATION
     // =========================
 
-    public ResponseEntity<Map<String, String>> validateToken(String token, String user) {
+    public boolean validateToken(String token, String user) {
 
-        Map<String, String> response = new HashMap<>();
-
-        if (!tokenService.validateToken(token, user)) {
-            response.put("message", "Invalid or expired token");
-            return ResponseEntity.status(401).body(response);
-        }
-
-        response.put("message", "Token is valid");
-        return ResponseEntity.ok(response);
+        return tokenService.validateToken(token, user);
     }
 
     // =========================
@@ -76,7 +68,7 @@ public class MainService {
                 return ResponseEntity.status(401).body(response);
             }
 
-            String token = tokenService.generateToken(admin.getId(), "ADMIN");
+            String token = tokenService.generateToken(admin.getUsername());
 
             response.put("token", token);
             response.put("message", "Login successful");
@@ -181,7 +173,7 @@ public class MainService {
                 return ResponseEntity.status(401).body(response);
             }
 
-            String token = tokenService.generateToken(patient.getId(), "PATIENT");
+            String token = tokenService.generateToken(patient.getEmail());
 
             response.put("token", token);
             response.put("message", "Login successful");
@@ -203,7 +195,7 @@ public class MainService {
                                                              String token) {
 
         try {
-            String email = tokenService.extractEmail(token);
+            String email = tokenService.extractIdentifier(token);
             Patient patient = patientRepository.findByEmail(email);
 
             if (patient == null) {

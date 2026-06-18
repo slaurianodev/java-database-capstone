@@ -99,7 +99,7 @@ public class DoctorService {
                 return ResponseEntity.badRequest().body(response);
             }
 
-            String token = tokenService.generateToken(doctor.getId(), "DOCTOR");
+            String token = tokenService.generateToken(doctor.getEmail());
 
             response.put("token", token);
             response.put("message", "Login successful");

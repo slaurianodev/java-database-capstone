@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -35,11 +36,12 @@ public class AppointmentController {
                                              @PathVariable String patientName,
                                              @PathVariable String token) {
 
-        ResponseEntity<Map<String, String>> validation =
-                service.validateToken(token, "doctor");
+        Map<String, Object> response = new HashMap<>();
 
-        if (!validation.getStatusCode().is2xxSuccessful()) {
-            return validation;
+        boolean validation = service.validateToken(token, "doctor");
+
+        if (!validation) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
         LocalDate parsedDate;
@@ -67,11 +69,8 @@ public class AppointmentController {
     public ResponseEntity<?> bookAppointment(@PathVariable String token,
                                              @RequestBody Appointment appointment) {
 
-        ResponseEntity<Map<String, String>> validation =
-                service.validateToken(token, "patient");
-
-        if (!validation.getStatusCode().is2xxSuccessful()) {
-            return validation;
+        if (!service.validateToken(token, "patient")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
         }
 
         int result = service.validateAppointment(appointment);
@@ -103,11 +102,8 @@ public class AppointmentController {
     public ResponseEntity<?> updateAppointment(@PathVariable String token,
                                                @RequestBody Appointment appointment) {
 
-        ResponseEntity<Map<String, String>> validation =
-                service.validateToken(token, "patient");
-
-        if (!validation.getStatusCode().is2xxSuccessful()) {
-            return validation;
+        if (!service.validateToken(token, "patient")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
         }
 
         return ResponseEntity.ok(
@@ -123,11 +119,9 @@ public class AppointmentController {
     public ResponseEntity<?> cancelAppointment(@PathVariable Long id,
                                                @PathVariable String token) {
 
-        ResponseEntity<Map<String, String>> validation =
-                service.validateToken(token, "patient");
 
-        if (!validation.getStatusCode().is2xxSuccessful()) {
-            return validation;
+        if (!service.validateToken(token, "patient")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
         }
 
         return ResponseEntity.ok(
