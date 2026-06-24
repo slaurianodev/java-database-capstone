@@ -83,7 +83,7 @@ public class AppointmentService {
         Appointment appointment = appointmentOpt.get();
 
         try {
-            Long userId = tokenService.extractUserId(token);
+            Long userId = Long.valueOf(tokenService.extractIdentifier(token));
 
             // Ensure only the owner (patient) can cancel
             if (!appointment.getId().equals(userId)) {
@@ -107,7 +107,7 @@ public class AppointmentService {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            Long doctorId = tokenService.extractUserId(token);
+            Long doctorId = Long.valueOf(tokenService.extractIdentifier(token));
 
             LocalDateTime start = date.atStartOfDay();
             LocalDateTime end = date.atTime(LocalTime.MAX);
